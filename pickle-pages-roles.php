@@ -69,6 +69,7 @@ final class Pickle_Pages_Roles {
 		 */
 		include_once(PICKLE_PAGES_ROLES_ADMIN_PATH.'admin.php');
 		include_once(PICKLE_PAGES_ROLES_ADMIN_PATH.'classes/metabox.php');
+		include_once(PICKLE_PAGES_ROLES_ADMIN_PATH.'classes/posts-filters.php');	
 		include_once(PICKLE_PAGES_ROLES_ADMIN_PATH.'classes/settings.php');		
 		
 		if (is_admin()) :

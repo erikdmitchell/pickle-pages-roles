@@ -9,12 +9,7 @@ final class Pickle_Pages_Roles_Admin {
 	public $settings='';
 
 	public function __construct() {
-		$this->includes();
 		$this->init_hooks();
-	}
-
-	public function includes() {
-
 	}
 
 	private function init_hooks() {
