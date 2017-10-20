@@ -39,16 +39,10 @@ final class Pickle_Pages_Roles_Admin {
 	}
 	
 	public function update_posts_edit_roles() {
-echo '<pre>';		
-print_r($this->settings);
-echo '</pre>';
-
 		if (empty($this->settings['post_types']) || empty($this->settings['default_roles'])) :
-			// unset all 
-		else :
 			$post_ids=get_posts(array(
 				'posts_per_page' => -1,
-				'post_type' => $this->settings['post_types'],
+				'post_type' => get_post_types(),
 				'fields' => 'ids',
 				'post_status' => 'any',
 			));
@@ -58,17 +52,33 @@ echo '</pre>';
 					$existing_roles=ppr_post_edit_roles($post_id);
 					$roles=ppr_wp_parse_args($this->settings['default_roles'], $existing_roles);
 				
-					ppr_update_post_edit_roles($post_id, $roles);
+					ppr_remove_post_edit_roles($post_id);
 				endforeach;
 			endif;
-				
+		else :
+			$post_ids=get_posts(array(
+				'posts_per_page' => -1,
+				//'post_type' => $this->settings['post_types'],
+				'post_type' => get_post_types(),
+				'fields' => 'ids',
+				'post_status' => 'any',
+			));
 
-// make sure we are not overriding custom settings
-// check post 10602		
+			if (count($post_ids)) :
+				foreach ($post_ids as $post_id) :
+					$existing_roles=ppr_post_edit_roles($post_id);
+					$roles=ppr_wp_parse_args($this->settings['default_roles'], $existing_roles);
+				
+					// add if check, otherwise remove //
+					if (in_array(get_post_type($post_id), $this->settings['post_types'])) :					
+						ppr_update_post_edit_roles($post_id, $roles); // add
+					else :						
+						ppr_remove_post_edit_roles($post_id); // remove
+					endif;
+				endforeach;
+			endif;	
 		endif;
 
-// ppr_update_post_edit_roles($post_id=0, $roles='') //
-exit;	
 		return;	
 	}
 

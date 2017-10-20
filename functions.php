@@ -33,6 +33,9 @@ function ppr_wp_parse_args(&$a, $b) {
  * @return void
  */
 function ppr_checked_array($checked='', $array=array(), $echo=true) {
+	if (!is_array($array))
+		return;
+			
 	if (in_array($checked, $array)) :
 		$checked_output='checked="checked"';
 	else :
@@ -75,5 +78,12 @@ function ppr_update_post_edit_roles($post_id=0, $roles='') {
 		return;
 	
 	update_post_meta($post_id, '_ppr_roles_allow_edit', $roles);		
+}
+
+function ppr_remove_post_edit_roles($post_id=0) {
+	if (!$post_id)
+		return;
+	
+	delete_post_meta($post_id, '_ppr_roles_allow_edit');	
 }
 ?>
