@@ -62,7 +62,7 @@ final class Pickle_Pages_Roles {
 		/**
 		 * classes
 		 */
-		include_once(PICKLE_PAGES_ROLES_PATH.'install.php');
+		include_once(PICKLE_PAGES_ROLES_PATH.'classes/install.php');
 		
 		/**
 		 * admin
