@@ -77,15 +77,9 @@ final class Pickle_Pages_Roles {
 	}
 
 	private function init_hooks() {
-		//register_activation_hook( WC_PLUGIN_FILE, array( 'WC_Install', 'install' ) );
 		register_activation_hook(PPR_FILE, array('Pickle_Pages_Roles_Install', 'install'));
-		//register_activation_hook(PPR_FILE, array($this, 'install'));
 	}
 	
-	public function install() {
-//add_option('ppr', 1);
-	}
-
 }
 
 function pickle_pges_roles() {

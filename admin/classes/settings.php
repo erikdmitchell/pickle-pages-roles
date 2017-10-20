@@ -28,6 +28,9 @@ class Pickle_Pages_Roles_Admin_Settings {
 		
 		// reload settings //
 		pickle_pges_roles()->admin->settings();
+		
+		// run our admin update //
+		pickle_pges_roles()->admin->update_posts_edit_roles();
 	}
 	
 }
