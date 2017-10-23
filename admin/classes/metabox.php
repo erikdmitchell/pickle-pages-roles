@@ -27,7 +27,7 @@ class Pickle_Pages_Roles_Meta_Box {
     }
 
     public function render_metabox($post) {
-        wp_nonce_field('custom_nonce_action', 'custom_nonce');
+        wp_nonce_field('update', 'update_restrict_roles');
         
         $html='';
         
@@ -36,8 +36,8 @@ class Pickle_Pages_Roles_Meta_Box {
         	
         	$html.='<fieldset">';
         	
-        		foreach (ppr_get_roles()->role_names as $slug => $name) :
-        			$html.='<label for="'.$slug.'"><input name="ppr_retrict_roles[]" type="checkbox" id="'.$slug.'" value="'.$slug.'" '.ppr_checked_array($slug, ppr_post_edit_roles($post->ID), false).'>'.$name.'</label><br/>';
+        		foreach (ppr_get_roles()->role_names as $slug => $name) :        			
+        			$html.='<label for="'.$slug.'"><input name="ppr_retrict_roles[]" type="checkbox" id="'.$slug.'" value="'.$slug.'" '.ppr_role_checked($post->ID, $slug, false).'>'.$name.'</label><br/>';
         		endforeach;
         	
         	$html.='</fieldset>';
@@ -48,7 +48,7 @@ class Pickle_Pages_Roles_Meta_Box {
 
     public function save_metabox($post_id, $post) {
         // Check nonce
-        if (!isset($_POST['custom_nonce']) || !wp_verify_nonce($_POST['custom_nonce'], 'custom_nonce_action'))
+        if (!isset($_POST['update_restrict_roles']) || !wp_verify_nonce($_POST['update_restrict_roles'], 'update'))
             return;
  
         // Check if user has permissions to save data.

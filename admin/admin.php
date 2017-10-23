@@ -67,7 +67,7 @@ final class Pickle_Pages_Roles_Admin {
 					// add if check, otherwise remove //
 					if (in_array(get_post_type($post_id), $this->settings['post_types'])) :					
 						ppr_update_post_edit_roles($post_id, $roles); // add
-					else :						
+					else :					
 						ppr_remove_post_edit_roles($post_id); // remove
 					endif;
 				endforeach;
