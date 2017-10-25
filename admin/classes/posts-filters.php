@@ -40,6 +40,9 @@ class Pickle_Pages_Roles_Admin_Posts_Filters {
 	public function check_post_edit_access() {
 		global $post;
 
+		if (empty($post))
+			return;
+
 		foreach ($this->user->roles as $role) :
 			if (!ppr_can_role_edit($post->ID, $role)) :
 				wp_die(__('You do not have access to this post.'));
